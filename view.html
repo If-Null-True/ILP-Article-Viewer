@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Independent Learning Project | Manly Campus | Northern Beaches Secondary College">
+  <title>%ARTICLE_TITLE% by %ARTICLE_AUTHORS% | ILP | Manly Selective Campus</title>
+
+  <!-- Icons -->
+  <link rel="shortcut icon" href="resources/favicons/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+        rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://dev.oggyp.com/ilp/resources/stylesheets/css/main.css">
+  <link rel="stylesheet" href="https://dev.oggyp.com/ilp/resources/stylesheets/css/simplified_nav.css">
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://cdn.oggyp.com/fonts/Google.css">
+
+  <!-- Scripts -->
+  <script src="https://dev.oggyp.com/ilp/resources/scripts/javascript/nav.js" defer></script>
+</head>
+<body>
+  <nav>
+    <div id='main-nav'>
+      <a class="aria-only focusable" id="skip-main-nav-button" href="#main">Skip to main content</a>
+
+      <button
+        id='main-nav-button'
+        aria-label='Open Navigation Button'
+        onclick='toggleNav()'
+      >
+        <span class="material-icons-outlined open-button" role="presentation">close</span>
+        <span class="material-icons-outlined close-button" role="presentation">menu</span>
+      </button>
+
+
+      <nav class='collapsing' id='main-menu' aria-label='Main Menu'>
+        <ul>
+          <li>
+            <h2>
+              <span class="material-icons-outlined" role="presentation">article</span>
+              Pages
+            </h2>
+
+            <nav class='submenu' aria-label='Pages Submenu'>
+              <ul>
+                <li>
+                  <a href='https://ilp.oggyp.com'>
+                    <span class="material-icons-outlined" role="presentation">home</span>
+                    Home
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </nav>
+
+  <main id="main">
+    <article>
+      <h1 class="title">%ARTICLE_TITLE%</h1>
+      <span class="subtitle">%ARTICLE_TAGS%</span>
+
+      <div class="authors">
+        by %ARTICLE_AUTHORS%
+      </div>
+
+      <div class="paper">
+        <span class="question">%ARTICLE_QUESTION%</span>
+
+        %ARTICLE_CONTENT%
+      </div>
+    </article>
+  </main>
+</body>
+</html>

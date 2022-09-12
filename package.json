@@ -1,0 +1,22 @@
+{
+    "name": "ILP Article Viewer",
+    "version": "1.0.0",
+    "description": "ILP Article Viewer",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node src/index.js"
+    },
+    "author": "OggyP",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.1",
+        "jsdom": "^20.0.0",
+        "mongodb": "^4.9.1"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "@types/jsdom": "^20.0.0"
+    },
+    "type": "module"
+}
