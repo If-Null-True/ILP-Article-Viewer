@@ -53,18 +53,18 @@ function getAuthorString(authors) {
 
 app.get("/:articleId/", async (req, res) => {
     const id = req.params.articleId
+
+    const database = client.db('ilp');
+    const articles = database.collection('article')
+    const article = await articles.findOne({ _id: new ObjectId(id) })
+    console.log(article)
+
+    if (article === null) {
+        res.status(400)
+        res.send("Article Not Found")
+        return
+    }
     try {
-        const database = client.db('ilp');
-        const articles = database.collection('article')
-        const article = await articles.findOne({ _id: new ObjectId(id) })
-        console.log(article)
-
-        if (article === null) {
-            res.status(400)
-            res.send("Article Not Found")
-            return
-        }
-
         const result = await fsp.readFile(`/opt/ilpArticles/${id}/index.html`, 'utf8')
         console.log(result)
 
@@ -184,7 +184,91 @@ app.get("/:articleId/", async (req, res) => {
         }
     } catch (e) {
         res.status(400)
-        res.send("This Article Is Under Construction!")
+        res.send(`<!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta name="description" content="Independent Learning Project | Manly Campus | Northern Beaches Secondary College">
+          <title>${article.title} by ${getAuthorString(article.authors)} | ILP | Manly Selective Campus</title>
+        
+          <!-- Icons -->
+          <link rel="shortcut icon" href="https://dev.oggyp.com/resources/favicons/favicon.ico" type="image/x-icon">
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+                rel="stylesheet">
+        
+          <!-- Stylesheets -->
+          <link rel="stylesheet" href="https://dev.oggyp.com/ilp/resources/stylesheets/css/main.css">
+          <link rel="stylesheet" href="https://dev.oggyp.com/ilp/resources/stylesheets/css/simplified_nav.css">
+        
+          <!-- Fonts -->
+          <link rel="stylesheet" href="https://cdn.oggyp.com/fonts/Google.css">
+        
+          <!-- Scripts -->
+          <script src="https://dev.oggyp.com/ilp/resources/scripts/javascript/nav.js" defer></script>
+        </head>
+        <body class="has-article">
+          <nav>
+            <div id='main-nav'>
+              <a class="aria-only focusable" id="skip-main-nav-button" href="#main">Skip to main content</a>
+        
+              <buttonimage.pngimage.png
+                id='main-nav-button'
+                aria-label='Open Navigation Button'
+                onclick='toggleNav()'
+              >
+                <span class="material-icons-outlined open-button" role="presentation">close</span>
+                <span class="material-icons-outlined close-button" role="presentation">menu</span>
+              </button>
+        
+        
+              <nav class='collapsing' id='main-menu' aria-label='Main Menu'>
+                <ul>
+                  <li>
+                    <h2>
+                      <span class="material-icons-outlined" role="presentation">article</span>
+                      Pages
+                    </h2>
+        
+                    <nav class='submenu' aria-label='Pages Submenu'>
+                      <ul>
+                        <li>
+                          <a href='https://ilp.oggyp.com'>
+                            <span class="material-icons-outlined" role="presentation">home</span>
+                            Home
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </nav>
+        
+          <main id="main">
+            <article>
+              <h1 class="title">${article.title}</h1>
+              <span class="subtitle">${article.tags.join(", ")}</span>
+        
+              <div class="authors">
+                by ${getAuthorString(article.authors)}
+              </div>
+        
+              <div class="paper">
+                <span class="question">${article.question}</span>
+        
+                <p>Nothing to see here yet. Stay tuned!</p>
+                <br>
+                <br>
+                <br>
+                <p>${e.toString()}</p>
+              </div>
+            </article>
+          </main>
+        </body>
+        </html>`)
         return
     }
 })
